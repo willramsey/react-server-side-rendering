@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
+import { Helmet } from 'react-helmet';
 
 class UsersList extends Component {
   componentDidMount() {
@@ -15,10 +16,23 @@ class UsersList extends Component {
     });
   }
 
+  head() {
+    return (
+      <Helmet>
+        <title>{`${this.props.users.length} Users`}</title>
+        <meta property="og:title" content="User Directory" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="http://i0.kym-cdn.com/photos/images/newsfeed/000/096/044/trollface.jpg?1296494117" />
+        <meta property="og:url" content="https://wramsey.com" />
+      </Helmet>
+    );
+  }
+
   render() {
     return (
       <div>
-        List of Users:
+        {this.head()}
+        <h3>List of Users: </h3>
         <ul>
           {this.renderUsers()}
         </ul>
